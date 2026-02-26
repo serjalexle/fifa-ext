@@ -1,0 +1,40 @@
+{
+  "manifest_version": 3,
+  "name": "FC Helper",
+  "version": "0.0.1",
+  "description": "UI helper",
+  "action": {
+    "default_title": "FC Helper",
+    "default_popup": "popup.html"
+  },
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://www.ea.com/*/ultimate-team/web-app*",
+    "https://www.ea.com/ea-sports-fc/ultimate-team/web-app*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.ea.com/*/ultimate-team/web-app*",
+        "https://www.ea.com/ea-sports-fc/ultimate-team/web-app*"
+      ],
+      "js": ["bridgeBoot.js"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": [
+        "https://www.ea.com/*/ultimate-team/web-app*",
+        "https://www.ea.com/ea-sports-fc/ultimate-team/web-app*"
+      ],
+      "js": ["content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["transferMarketBridge.js"],
+      "matches": ["https://www.ea.com/*"]
+    }
+  ]
+}
