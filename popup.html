@@ -4,41 +4,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FC Helper</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        min-width: 280px;
-        padding: 14px;
-        background: #111827;
-        color: #f9fafb;
-      }
-
-      h1 {
-        margin: 0 0 8px;
-        font-size: 16px;
-      }
-
-      p {
-        margin: 0;
-        font-size: 13px;
-        line-height: 1.4;
-        color: #d1d5db;
-      }
-
-      code {
-        background: #1f2937;
-        padding: 2px 4px;
-        border-radius: 4px;
-        color: #93c5fd;
-      }
-    </style>
+    <link rel="stylesheet" href="./styles/popup.css" />
   </head>
   <body>
-    <h1>FC Helper</h1>
-    <p>
-      Extension is active. UI appears only on
-      <code>ea.com/ea-sports-fc/ultimate-team/web-app</code>.
-    </p>
+    <section class="fc-popup">
+      <div class="fc-popup-brand">
+        <div class="fc-popup-brand-icon-wrap">
+          <img
+            class="fc-popup-brand-icon"
+            src="./icons/icon-32.png"
+            alt="FC Helper icon"
+          />
+        </div>
+        <h1 class="fc-popup-title">FC Helper</h1>
+      </div>
+      <p class="fc-popup-text">Extension is active.</p>
+      <p class="fc-popup-text">
+        UI appears only on
+        <a
+          class="fc-popup-link"
+          href="https://www.ea.com/ea-sports-fc/ultimate-team/web-app/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <code>ea.com/ea-sports-fc/ultimate-team/web-app</code>
+        </a>
+      </p>
+    </section>
   </body>
 </html>

@@ -1,7 +1,14 @@
-import type { SiteTab } from "../storage/tabs";
+export type SiteTab =
+  | "home"
+  | "squad"
+  | "transfers"
+  | "store"
+  | "club"
+  | "sbc"
+  | "evo"
+  | "settings"
+  | "unknown";
 
-const TAB_BAR_SELECTOR = ".ut-tab-bar";
-const TAB_ITEM_SELECTOR = ".ut-tab-bar-item";
 const SELECTED_TAB_ITEM_SELECTOR = ".ut-tab-bar-item.selected";
 
 const TAB_CLASS_MAP: Array<{ className: string; tab: SiteTab }> = [
@@ -17,8 +24,7 @@ const TAB_CLASS_MAP: Array<{ className: string; tab: SiteTab }> = [
 
 const resolveTabFromElement = (el: Element | null): SiteTab => {
   if (!el) return "unknown";
-
-  const hit = TAB_CLASS_MAP.find((m) => el.classList.contains(m.className));
+  const hit = TAB_CLASS_MAP.find((item) => el.classList.contains(item.className));
   return hit?.tab ?? "unknown";
 };
 
@@ -46,27 +52,11 @@ export const subscribeActiveSiteTab = (onChange: (tab: SiteTab) => void) => {
     queueMicrotask(emitIfChanged);
   };
 
-  const observer = new MutationObserver((mutations) => {
-    for (const mutation of mutations) {
-      if (mutation.type === "attributes") {
-        const target = mutation.target as Element;
-        if (target.matches(TAB_ITEM_SELECTOR) || target.matches(TAB_BAR_SELECTOR)) {
-          scheduleEmit();
-          return;
-        }
-      }
-
-      if (mutation.type === "childList") {
-        const target = mutation.target as Element;
-        if (target.matches(TAB_BAR_SELECTOR) || target.closest(TAB_BAR_SELECTOR)) {
-          scheduleEmit();
-          return;
-        }
-      }
-    }
+  const observer = new MutationObserver(() => {
+    scheduleEmit();
   });
 
-  observer.observe(document.body, {
+  observer.observe(document.body ?? document.documentElement, {
     subtree: true,
     childList: true,
     attributes: true,

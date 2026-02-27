@@ -1,5 +1,7 @@
-const REQUEST_SOURCE = "fc-helper-transfer-market-request";
-const RESPONSE_SOURCE = "fc-helper-transfer-market";
+const REQUEST_SOURCE = "fc-helper-sbc-request";
+const RESPONSE_SOURCE = "fc-helper-sbc-response";
+const STATUS_REQUEST_SOURCE = "fc-helper-sbc-status-request";
+const STATUS_RESPONSE_SOURCE = "fc-helper-sbc-status-response";
 const UTAS_PATH_FRAGMENT = "/ut/game/fc26/";
 const HEADER_ALLOWLIST = new Set([
   "x-ut-sid",
@@ -10,10 +12,15 @@ const HEADER_ALLOWLIST = new Set([
   "accept",
 ]);
 
-type TransferMarketBridgeRequest = {
+type BridgeRequestMessage = {
   source: typeof REQUEST_SOURCE;
   key: string;
   url: string;
+};
+
+type BridgeStatusRequestMessage = {
+  source: typeof STATUS_REQUEST_SOURCE;
+  key: string;
 };
 
 type XhrTracked = XMLHttpRequest & {
@@ -76,8 +83,7 @@ const installFetchCapture = () => {
   window.fetch = async (input: RequestInfo | URL, init?: RequestInit) => {
     const inputUrl = typeof input === "string" || input instanceof URL ? String(input) : input.url;
     if (isUtasRequest(inputUrl)) {
-      const requestHeaders =
-        input instanceof Request ? headersToRecord(input.headers) : {};
+      const requestHeaders = input instanceof Request ? headersToRecord(input.headers) : {};
       const initHeaders = headersToRecord(init?.headers);
       mergeAllowedHeaders({ ...requestHeaders, ...initHeaders });
     }
@@ -101,9 +107,7 @@ const installXhrCapture = () => {
     return originalOpen.apply(this, args);
   };
 
-  XMLHttpRequest.prototype.setRequestHeader = function (
-    ...args: Parameters<typeof originalSetRequestHeader>
-  ) {
+  XMLHttpRequest.prototype.setRequestHeader = function (...args: Parameters<typeof originalSetRequestHeader>) {
     const [header, value] = args;
     const tracked = this as XhrTracked;
     if (tracked.__fcHelperTracked) {
@@ -121,9 +125,6 @@ const installXhrCapture = () => {
   };
 };
 
-installFetchCapture();
-installXhrCapture();
-
 const postError = (key: string, status: number | undefined, error: string) => {
   window.postMessage(
     {
@@ -137,11 +138,30 @@ const postError = (key: string, status: number | undefined, error: string) => {
   );
 };
 
+installFetchCapture();
+installXhrCapture();
+
 window.addEventListener("message", async (event: MessageEvent) => {
   if (event.source !== window) return;
 
-  const data = event.data as TransferMarketBridgeRequest | undefined;
-  if (!data || data.source !== REQUEST_SOURCE || typeof data.key !== "string" || typeof data.url !== "string") {
+  const data = event.data as BridgeRequestMessage | BridgeStatusRequestMessage | undefined;
+  if (!data || typeof data.key !== "string") {
+    return;
+  }
+
+  if (data.source === STATUS_REQUEST_SOURCE) {
+    window.postMessage(
+      {
+        source: STATUS_RESPONSE_SOURCE,
+        key: data.key,
+        captured: Object.keys(capturedAuthHeaders).length > 0,
+      },
+      window.origin,
+    );
+    return;
+  }
+
+  if (data.source !== REQUEST_SOURCE || typeof data.url !== "string") {
     return;
   }
 
@@ -149,12 +169,14 @@ window.addEventListener("message", async (event: MessageEvent) => {
     postError(
       data.key,
       undefined,
-      "EA auth headers are not captured yet. Open a market/search action manually, then retry.",
+      "EA auth headers are not captured yet. Open any UT section and retry.",
     );
     return;
   }
 
   try {
+    // Execute exact SBC sets request with captured EA auth headers.
+    // Endpoint: GET /ut/game/fc26/sbs/sets -> returns object with `categories[]`.
     const response = await fetch(data.url, {
       method: "GET",
       credentials: "omit",

@@ -1,0 +1,25 @@
+FC Helper removed request notes (backup)
+
+Removed API endpoints:
+- https://utas.mob.v5.prd.futc-ext.gcp.ea.com/ut/game/fc26/transfermarket
+- https://utas.mob.v5.prd.futc-ext.gcp.ea.com/ut/game/fc26/club
+- https://utas.mob.v5.prd.futc-ext.gcp.ea.com/ut/game/fc26/usermassinfo
+- Players catalog fallback:
+  https://www.ea.com/ea-sports-fc/ultimate-team/web-app/content/26E4D4D6-8DBB-4A9A-BD99-9C47D3AA341D/2026/fut/items/web/players.json
+
+Removed bridge messaging constants:
+- Request source: fc-helper-transfer-market-request
+- Response source: fc-helper-transfer-market
+- Event: fc-helper:transfer-market-data
+- Bridge script id: fc-helper-transfer-market-bridge
+- Bridge script file: transferMarketBridge.js
+
+Removed request flows:
+- fetchTransferMarket(params: num, start, type, lev)
+- fetchUserMassInfo()
+- loadTransferMarketBatch(totalCount)
+- loadAllClubPlayers({ enrich, maxPages })
+
+Notes:
+- Data was previously fetched via an injected bridge script that captured EA auth headers and proxied GET requests.
+- This backup exists so request behavior can be restored later if needed.

@@ -1,0 +1,14 @@
+:root {
+  --fc-theme-bg-1: #101012;
+  --fc-theme-bg-2: #17161a;
+  --fc-theme-panel-1: rgba(23, 22, 26, 0.98);
+  --fc-theme-panel-2: rgba(16, 16, 18, 0.98);
+  --fc-theme-border: rgba(240, 193, 84, 0.34);
+  --fc-theme-border-strong: rgba(240, 193, 84, 0.78);
+  --fc-theme-text: #f3f1ea;
+  --fc-theme-text-soft: #d4cfbe;
+  --fc-theme-accent: #f0c154;
+  --fc-theme-accent-strong: #ffd87a;
+  --fc-theme-shadow: rgba(0, 0, 0, 0.52);
+}
+

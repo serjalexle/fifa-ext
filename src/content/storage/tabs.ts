@@ -1,7 +1,12 @@
-export type FCTab = "transfers" | "store" | "evo" | "sbc";
-export type SiteTab = "home" | "squad" | "transfers" | "store" | "club" | "sbc" | "evo" | "settings" | "unknown";
+export type FCTab = "home" | "transfers" | "store" | "evo" | "sbc";
 
 export const TAB_SELECTORS: Record<FCTab, readonly string[]> = {
+  home: [
+    ".ut-tab-bar-item.icon-home",
+    "button.ut-tab-bar-item.icon-home",
+    "[class~='ut-tab-bar-item'][class*='icon-home']",
+    ".icon-home",
+  ],
   transfers: [
     ".ut-tab-bar-item.icon-transfer",
     "button.ut-tab-bar-item.icon-transfer",
@@ -26,16 +31,4 @@ export const TAB_SELECTORS: Record<FCTab, readonly string[]> = {
     "[class~='ut-tab-bar-item'][class*='icon-sbc']",
     ".icon-sbc",
   ],
-} as const;
-
-export const SITE_TAB_LABELS: Record<SiteTab, string> = {
-  home: "Home",
-  squad: "Squads",
-  transfers: "Transfers",
-  store: "Store",
-  club: "Club",
-  sbc: "SBC",
-  evo: "Evolutions",
-  settings: "Settings",
-  unknown: "Unknown",
 } as const;

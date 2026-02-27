@@ -8,12 +8,11 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: "dist",
       sourcemap: true,
-      emptyOutDir: !isDev, // ✅ у dev НЕ чистимо dist
+      emptyOutDir: !isDev, // Keep dist in dev watch mode.
       rollupOptions: {
         input: {
-          bridgeBoot: resolve(__dirname, "src/content/bridgeBoot.ts"),
           content: resolve(__dirname, "src/content/index.ts"),
-          transferMarketBridge: resolve(__dirname, "src/injected/transferMarketBridge.ts"),
+          sbcBridge: resolve(__dirname, "src/injected/sbcBridge.ts"),
         },
         output: {
           entryFileNames: "[name].js",
