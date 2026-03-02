@@ -1,0 +1,462 @@
+{
+  "playerList": [
+    {
+      "guid": "91d83a658bcd402Mbappe231747",
+      "keyAttributes": [
+        20,
+        3
+      ]
+    },
+    {
+      "guid": "58bcd402ji03tj3Salah209331",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "fa997bf984614b3baee35f346b43c10f",
+      "keyAttributes": [
+        20,
+        3
+      ]
+    },
+    {
+      "guid": "92b68378-c251-4fe0-b9a2-583c66644919",
+      "keyAttributes": [
+        102,
+        101
+      ]
+    },
+    {
+      "guid": "6e52caea-964a-433f-8e11-5e041af64173",
+      "keyAttributes": [
+        102,
+        101
+      ]
+    },
+    {
+      "guid": "c50894bf-0bb7-42f4-a6c2-feb59705a74e",
+      "keyAttributes": [
+        102,
+        101
+      ]
+    },
+    {
+      "guid": "edb5ef4f-9874-429d-b3ce-eff4f68e244a",
+      "keyAttributes": [
+        16,
+        23,
+        13,
+        15,
+        0
+      ]
+    },
+    {
+      "guid": "7946447d1e614c3b96424f7fea15d32f",
+      "keyAttributes": [
+        102,
+        101,
+        100,
+        0
+      ]
+    },
+    {
+      "guid": "243935b2-6eef-4036-8367-58e0904ddff0",
+      "keyAttributes": [
+        100,
+        0,
+        1,
+        11,
+        16
+      ]
+    },
+    {
+      "guid": "36801d1d-2125-4dd0-ac47-782775fabfca",
+      "keyAttributes": [
+        102,
+        100
+      ]
+    },
+    {
+      "guid": "62822ffd-a747-4241-a0bc-449202f0c3c1",
+      "keyAttributes": [
+        100
+      ]
+    },
+    {
+      "guid": "a20ba2d6-70ed-448f-99f2-d38f52ff29da",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "2628be9f418c40449a710f6c07271b4d",
+      "keyAttributes": [
+        100
+      ]
+    },
+    {
+      "guid": "670ba09b8ff845f7909ef92dc8663556",
+      "keyAttributes": [
+        102
+      ]
+    },
+    {
+      "guid": "45f0b4fac54448889af74ce9e8b4f870",
+      "keyAttributes": [
+        100,
+        102
+      ]
+    },
+    {
+      "guid": "198b3fca8bbb4c33b73970038ef0c55c",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "df4208e0674348afa1ef2b5a90094e66",
+      "keyAttributes": [
+        0,
+        2,
+        21
+      ]
+    },
+    {
+      "guid": "9b2b48b7-6cb1-4d6f-b2e2-51b33bd76f77",
+      "keyAttributes": [
+        100
+      ]
+    },
+    {
+      "guid": "0d397ae9-a1c1-4a32-ad62-2e6e4573ffc5",
+      "keyAttributes": [
+        102,
+        101
+      ]
+    },
+    {
+      "guid": "9d65a722276d438d91507ffebebddbce",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "b7451ec5-e504-40eb-bc03-181f46d5705f",
+      "keyAttributes": [
+        4
+      ]
+    },
+    {
+      "guid": "c903419895a44d14b088af7a422c5419",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "bf76e10bbe25487fb521138aca7b4d75",
+      "keyAttributes": [
+        21,
+        24
+      ]
+    },
+    {
+      "guid": "2fa142d2392347b5ab29b9c900b15150",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "8ff9acdd951e4e4aa6f9bfe4aaeea5b1",
+      "keyAttributes": [
+        100
+      ]
+    },
+    {
+      "guid": "e826b819-b1d0-4997-972f-eb68cb0dafe2",
+      "keyAttributes": [
+        101,
+        100,
+        16
+      ]
+    },
+    {
+      "guid": "af5ffdb3-7d44-4c92-95c7-82c373a179a2",
+      "keyAttributes": [
+        102,
+        101,
+        11
+      ]
+    },
+    {
+      "guid": "86deaca4-e7ec-4ef4-b3cb-c5b9f3b016dd",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "535f8aed-c790-4e45-a27d-1babfcd94c52",
+      "keyAttributes": [
+        22,
+        23,
+        17
+      ]
+    },
+    {
+      "guid": "94040b1c-f8dc-4096-9242-5b6826970812",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "efddaacf-b68b-4bf5-addd-5fbeb997372c",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "77e1be62-fa16-40b6-b852-70d909c8f078",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "7eb14142-94de-42d0-a299-277f61536b32",
+      "keyAttributes": [
+        21,
+        6,
+        102
+      ]
+    },
+    {
+      "guid": "f5b5782d-2f1c-4708-a2c1-b01f2bf72e50",
+      "keyAttributes": [
+        0,
+        1,
+        26,
+        27,
+        2
+      ]
+    },
+    {
+      "guid": "2be4b5ed-5e65-4697-89ef-583a9198d2fc",
+      "keyAttributes": [
+        102
+      ]
+    },
+    {
+      "guid": "fa27765a-6908-4d69-9fe7-4079cebf26a5",
+      "keyAttributes": [
+        102,
+        101,
+        100
+      ]
+    },
+    {
+      "guid": "d6c3ac22-55d6-416a-a1fc-fe4d8390743e",
+      "keyAttributes": [
+        102,
+        101
+      ]
+    },
+    {
+      "guid": "58f5ea48-e0f8-4f74-bdcb-2305bc811359",
+      "keyAttributes": [
+        101,
+        102
+      ]
+    }
+  ],
+  "positionList": [
+    {
+      "position": "GK",
+      "keyAttributes": [
+        32,
+        30,
+        29,
+        33,
+        31
+      ]
+    },
+    {
+      "position": "RWB",
+      "keyAttributes": [
+        24,
+        21,
+        8,
+        14,
+        1
+      ]
+    },
+    {
+      "position": "RB",
+      "keyAttributes": [
+        24,
+        21,
+        25,
+        0,
+        19
+      ]
+    },
+    {
+      "position": "CB",
+      "keyAttributes": [
+        21,
+        24,
+        6,
+        25,
+        8
+      ]
+    },
+    {
+      "position": "LB",
+      "keyAttributes": [
+        24,
+        21,
+        25,
+        0,
+        19
+      ]
+    },
+    {
+      "position": "LWB",
+      "keyAttributes": [
+        24,
+        21,
+        8,
+        14,
+        1
+      ]
+    },
+    {
+      "position": "CDM",
+      "keyAttributes": [
+        21,
+        24,
+        10,
+        13,
+        20
+      ]
+    },
+    {
+      "position": "RM",
+      "keyAttributes": [
+        1,
+        15,
+        2,
+        20,
+        7
+      ]
+    },
+    {
+      "position": "CM",
+      "keyAttributes": [
+        13,
+        7,
+        12,
+        20,
+        10
+      ]
+    },
+    {
+      "position": "LM",
+      "keyAttributes": [
+        1,
+        15,
+        2,
+        20,
+        7
+      ]
+    },
+    {
+      "position": "CAM",
+      "keyAttributes": [
+        15,
+        2,
+        12,
+        13,
+        1
+      ]
+    },
+    {
+      "position": "CF",
+      "keyAttributes": [
+        11,
+        16,
+        15,
+        2,
+        23
+      ]
+    },
+    {
+      "position": "RW",
+      "keyAttributes": [
+        15,
+        2,
+        1,
+        7,
+        11
+      ]
+    },
+    {
+      "position": "RF",
+      "keyAttributes": [
+        15,
+        2,
+        1,
+        7,
+        11
+      ]
+    },
+    {
+      "position": "ST",
+      "keyAttributes": [
+        11,
+        16,
+        7,
+        6,
+        0
+      ]
+    },
+    {
+      "position": "LW",
+      "keyAttributes": [
+        15,
+        2,
+        1,
+        7,
+        11
+      ]
+    },
+    {
+      "position": "LF",
+      "keyAttributes": [
+        15,
+        2,
+        1,
+        7,
+        11
+      ]
+    }
+  ]
+}

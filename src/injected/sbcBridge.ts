@@ -16,6 +16,8 @@ type BridgeRequestMessage = {
   source: typeof REQUEST_SOURCE;
   key: string;
   url: string;
+  method?: string;
+  body?: unknown;
 };
 
 type BridgeStatusRequestMessage = {
@@ -165,7 +167,8 @@ window.addEventListener("message", async (event: MessageEvent) => {
     return;
   }
 
-  if (Object.keys(capturedAuthHeaders).length === 0) {
+  const isUtasTarget = isUtasRequest(data.url);
+  if (isUtasTarget && Object.keys(capturedAuthHeaders).length === 0) {
     postError(
       data.key,
       undefined,
@@ -175,13 +178,26 @@ window.addEventListener("message", async (event: MessageEvent) => {
   }
 
   try {
-    // Execute exact SBC sets request with captured EA auth headers.
-    // Endpoint: GET /ut/game/fc26/sbs/sets -> returns object with `categories[]`.
+    const normalizedMethod = typeof data.method === "string" ? data.method.toUpperCase() : "GET";
+    const method = normalizedMethod === "POST" || normalizedMethod === "PUT" ? normalizedMethod : "GET";
+    const baseHeaders = isUtasTarget ? capturedAuthHeaders : {};
+    const withJsonBody = method === "POST" || method === "PUT";
+    const headers =
+      withJsonBody
+        ? {
+            ...baseHeaders,
+            "content-type": "application/json",
+          }
+        : baseHeaders;
+    const body = withJsonBody && data.body !== undefined ? JSON.stringify(data.body) : undefined;
+
+    // Execute UTAS request with captured EA auth headers.
     const response = await fetch(data.url, {
-      method: "GET",
+      method,
       credentials: "omit",
       mode: "cors",
-      headers: capturedAuthHeaders,
+      headers,
+      body,
     });
 
     let payload: unknown = null;

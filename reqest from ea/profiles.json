@@ -1,0 +1,281 @@
+{
+    "version": 32,
+    "profiles": [
+        {
+            "id": 4,
+            "fullChemistryOnPreferredPosition": false,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 2
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "fullChemistryOnPreferredPosition": true,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 3
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "UNIVERSAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 0
+                }
+            ]
+        },
+        {
+            "id": 6,
+            "fullChemistryOnPreferredPosition": false,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 2
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "fullChemistryOnPreferredPosition": true,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 3
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 3
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 3
+                }
+            ]
+        },
+        {
+            "id": 8,
+            "fullChemistryOnPreferredPosition": true,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 2
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "UNIVERSAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 9,
+            "fullChemistryOnPreferredPosition": false,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 2
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 10,
+            "fullChemistryOnPreferredPosition": false,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 3
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 11,
+            "fullChemistryOnPreferredPosition": true,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                }
+            ]
+        },
+        {
+            "id": 12,
+            "fullChemistryOnPreferredPosition": true,
+            "baseOverride": true,
+            "iconOverride": false,
+            "heroOverride": false,
+            "rules": [
+                {
+                    "parameterType": "NATION",
+                    "calculationType": "NORMAL",
+                    "value": 2
+                },
+                {
+                    "parameterType": "LEAGUE",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                },
+                {
+                    "parameterType": "CLUB",
+                    "calculationType": "NORMAL",
+                    "value": 1
+                }
+            ]
+        }
+    ],
+    "mappings": [
+        {
+            "profileId": 4,
+            "rarityIds": [
+                87
+            ]
+        },
+        {
+            "profileId": 5,
+            "rarityIds": [
+                69
+            ]
+        },
+        {
+            "profileId": 6,
+            "rarityIds": [
+                150
+            ]
+        },
+        {
+            "profileId": 7,
+            "rarityIds": [
+                44
+            ]
+        },
+        {
+            "profileId": 8,
+            "rarityIds": [
+                4,
+                25,
+                67,
+                116
+            ]
+        },
+        {
+            "profileId": 9,
+            "rarityIds": [
+                91
+            ]
+        },
+        {
+            "profileId": 10,
+            "rarityIds": [
+                28
+            ]
+        },
+        {
+            "profileId": 11,
+            "rarityIds": [
+                108,
+                129
+            ]
+        },
+        {
+            "profileId": 12,
+            "rarityIds": [
+                68
+            ]
+        }
+    ]
+}

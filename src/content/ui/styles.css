@@ -492,6 +492,53 @@
   color: #78b5ff;
 }
 
+.fc-helper-data-browser {
+  margin-top: 2px;
+  display: grid;
+  gap: 6px;
+}
+
+.fc-helper-data-section {
+  border-radius: 8px;
+  border: 1px solid rgba(240, 193, 84, 0.22);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px;
+  display: grid;
+  gap: 4px;
+}
+
+.fc-helper-data-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: #f6d27d;
+  letter-spacing: 0.01em;
+}
+
+.fc-helper-data-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--fc-text-soft);
+}
+
+.fc-helper-data-row > span:first-child {
+  color: var(--fc-text);
+}
+
+.fc-helper-data-row > span:last-child {
+  text-align: right;
+  color: #d7e8ff;
+  word-break: break-word;
+}
+
+.fc-helper-data-empty {
+  font-size: 10px;
+  color: var(--fc-text-soft);
+}
+
+.fc-helper-club-loading,
 .fc-helper-sbc-loading {
   display: flex;
   align-items: center;
@@ -501,6 +548,134 @@
   border: 1px dashed rgba(240, 193, 84, 0.34);
   background: rgba(255, 255, 255, 0.02);
   padding: 10px;
+}
+
+.fc-helper-club-browser {
+  margin-top: 2px;
+  display: grid;
+  gap: 8px;
+}
+
+.fc-helper-club-list {
+  display: grid;
+  gap: 6px;
+}
+
+#fc-helper-root.fc-helper--full .fc-helper-club-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.fc-helper-club-empty {
+  font-size: 11px;
+  color: var(--fc-text-soft);
+}
+
+.fc-helper-club-player-card {
+  border-radius: 8px;
+  border: 1px solid rgba(240, 193, 84, 0.24);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 8px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.fc-helper-club-player-image {
+  width: 52px;
+  flex: 0 0 52px;
+  aspect-ratio: 131 / 186;
+  border-radius: 6px;
+  border: 1px solid rgba(240, 193, 84, 0.28);
+  background:
+    linear-gradient(160deg, rgba(240, 193, 84, 0.18), rgba(240, 193, 84, 0.05)),
+    rgba(255, 255, 255, 0.03);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.fc-helper-club-player-image.is-fallback {
+  display: grid;
+  place-items: center;
+}
+
+.fc-helper-club-player-image.is-fallback::after {
+  content: "?";
+  color: var(--fc-text-soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.fc-helper-club-player-content {
+  min-width: 0;
+  flex: 1 1 auto;
+  display: grid;
+  gap: 4px;
+}
+
+.fc-helper-club-player-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.fc-helper-club-player-name {
+  min-width: 0;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--fc-text);
+  line-height: 1.25;
+}
+
+.fc-helper-club-player-ovr {
+  font-size: 14px;
+  font-weight: 700;
+  color: #f6d27d;
+  line-height: 1;
+}
+
+.fc-helper-club-player-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  font-size: 10px;
+  color: var(--fc-text-soft);
+}
+
+.fc-helper-club-player-attrs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.fc-helper-club-attr {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px;
+  border-radius: 6px;
+  border: 1px solid rgba(240, 193, 84, 0.18);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px 5px;
+}
+
+.fc-helper-club-attr-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--fc-text-soft);
+}
+
+.fc-helper-club-attr-value {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--fc-text);
+}
+
+.fc-helper-club-player-positions {
+  font-size: 9.5px;
+  color: #9ecfff;
 }
 
 .fc-helper-sbc-browser {
@@ -856,6 +1031,7 @@
 .fc-helper-sbc-task-fill {
   width: 18px;
   height: 18px;
+  padding: 0;
   border-radius: 50%;
   border: 1px solid rgba(255, 120, 120, 0.7);
   display: grid;
@@ -866,11 +1042,37 @@
   cursor: pointer;
   background: rgba(120, 18, 18, 0.75);
   box-shadow: 0 0 6px rgba(255, 80, 80, 0.35);
+  appearance: none;
+  line-height: 1;
 }
 
 .fc-helper-sbc-task-fill:hover {
   border-color: rgba(255, 160, 160, 0.9);
   background: rgba(160, 20, 20, 0.85);
+}
+
+.fc-helper-sbc-task-fill.is-loading {
+  border-color: rgba(240, 193, 84, 0.82);
+  color: #fff3cd;
+  background: rgba(142, 104, 20, 0.8);
+  box-shadow: 0 0 6px rgba(240, 193, 84, 0.45);
+}
+
+.fc-helper-sbc-task-fill.is-success {
+  border-color: rgba(130, 226, 162, 0.85);
+  color: #dfffea;
+  background: rgba(24, 120, 57, 0.82);
+  box-shadow: 0 0 6px rgba(120, 230, 160, 0.42);
+}
+
+.fc-helper-sbc-task-fill.is-error {
+  border-color: rgba(255, 120, 120, 0.9);
+  color: #ffe0e0;
+  background: rgba(168, 30, 30, 0.86);
+}
+
+.fc-helper-sbc-task-fill:disabled {
+  cursor: wait;
 }
 
 .is-hidden {
