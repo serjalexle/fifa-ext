@@ -2,10 +2,13 @@ import { ensureRoot } from "../dom/root";
 import { subscribeActiveSiteTab } from "../dom/siteNav";
 import {
   ensureSbcBridgeReady,
+  fetchSbcChallenges,
   fetchSbcSets,
   hasCapturedSbcAuthHeaders,
   waitForCapturedSbcAuthHeaders,
   type SbcCategory,
+  type SbcChallenge,
+  type SbcAward,
   type SbcSet,
 } from "../api/sbcSets";
 import { goToTab } from "../storage/tabsNav";
@@ -261,19 +264,104 @@ const resolveRewardImageUrl = (set: SbcSet) => {
   return `${EA_PLAYER_PORTRAIT_BASE_URL}${encodeURIComponent(guidAssetId)}.png`;
 };
 
-const resolveSetTasks = (set: SbcSet) => {
-  const bag = set as SbcSet & { challenges?: Array<Record<string, unknown>> };
-  const rawTasks = bag.challenges;
-  if (Array.isArray(rawTasks) && rawTasks.length > 0) {
-    return rawTasks.map((task, idx) => {
-      const title = task.name ?? task.title ?? task.description;
-      const text = typeof title === "string" && title.trim().length > 0 ? title.trim() : `Task ${idx + 1}`;
-      return text;
+type SbcTaskCard = {
+  title: string;
+  description?: string;
+  endTime?: string;
+  rewards?: string[];
+  reqTooltip?: string;
+  challengeId?: number;
+  isStatus?: boolean;
+};
+
+const formatSbcAward = (award: SbcAward) => {
+  const type = String(award.type ?? "reward");
+  const value = Number.isFinite(award.value) ? ` ${award.value}` : "";
+  const count = Number.isFinite(award.count) ? ` x${award.count}` : "";
+  const untradeable = award.isUntradeable ? " (UT)" : "";
+  return `${type}${value}${count}${untradeable}`.trim();
+};
+
+const formatSbcChallengeRewards = (awards?: SbcAward[]) => {
+  if (!Array.isArray(awards) || awards.length === 0) return [];
+  return awards.map((award) => formatSbcAward(award)).filter((text) => text.length > 0);
+};
+
+const formatSbcRequirementsTooltip = (
+  elgReq?: Array<Record<string, unknown>>,
+  elgOperation?: string,
+) => {
+  if (!Array.isArray(elgReq) || elgReq.length === 0) return "";
+  const grouped = new Map<string, string[]>();
+  for (const [idx, req] of elgReq.entries()) {
+    const bag = req as Record<string, unknown>;
+    const type = String(bag.type ?? `REQ ${idx + 1}`);
+    const slotRaw = bag.eligibilitySlot;
+    const slot = Number.isFinite(slotRaw) ? `Slot ${Number(slotRaw)}` : "General";
+    const key = bag.eligibilityKey;
+    const value = bag.eligibilityValue;
+    const parts: string[] = [];
+    if (key !== undefined) parts.push(`key ${key}`);
+    if (value !== undefined) parts.push(`value ${value}`);
+    const line = `${type}${parts.length > 0 ? ` (${parts.join(", ")})` : ""}`;
+    const bucket = grouped.get(slot) ?? [];
+    bucket.push(line);
+    grouped.set(slot, bucket);
+  }
+
+  const lines: string[] = [];
+  if (elgOperation) {
+    lines.push(`Operation: ${elgOperation}`);
+    lines.push("");
+  }
+
+  for (const [slot, items] of grouped.entries()) {
+    lines.push(`${slot}:`);
+    for (const item of items) {
+      lines.push(`- ${item}`);
+    }
+    lines.push("");
+  }
+
+  while (lines.length > 0 && lines[lines.length - 1] === "") {
+    lines.pop();
+  }
+
+  return lines.join("\n");
+};
+
+const buildSbcTaskCards = (
+  set: SbcSet,
+  challenges: SbcChallenge[] | undefined,
+  isLoading: boolean,
+  errorText?: string,
+): SbcTaskCard[] => {
+  if (isLoading) return [{ title: "Loading tasks...", isStatus: true }];
+  if (errorText) return [{ title: `Failed to load tasks: ${errorText}`, isStatus: true }];
+  if (challenges && challenges.length > 0) {
+    return challenges.map((challenge, idx) => {
+      const titleRaw = challenge.name ?? challenge.description ?? `Task ${idx + 1}`;
+      const title = typeof titleRaw === "string" && titleRaw.trim().length > 0 ? titleRaw.trim() : `Task ${idx + 1}`;
+      const description =
+        typeof challenge.description === "string" && challenge.description.trim().length > 0
+          ? challenge.description.trim()
+          : undefined;
+      const endTime = resolveEndDateTime(challenge.endTime);
+      return {
+        title,
+        description,
+        endTime,
+        rewards: formatSbcChallengeRewards(challenge.awards),
+        reqTooltip: formatSbcRequirementsTooltip(challenge.elgReq, challenge.elgOperation),
+        challengeId: challenge.challengeId,
+      };
     });
   }
 
   const count = Math.max(0, set.challengesCount ?? 0);
-  return Array.from({ length: count }, (_, idx) => `Task ${idx + 1}`);
+  return Array.from({ length: count }, (_, idx) => ({
+    title: `Task ${idx + 1}`,
+  }));
 };
 
 export const renderUI = () => {
@@ -286,9 +374,15 @@ export const renderUI = () => {
   let sbcCategories: SbcCategory[] = [];
   let sbcSelectedCategoryId: number | null = null;
   let flippedSbcSetIds = new Set<number>();
+  let sbcChallengesBySetId = new Map<number, SbcChallenge[]>();
+  let sbcChallengesLoading = new Set<number>();
+  let sbcChallengesErrors = new Map<number, string>();
   let warmupStarted = false;
   let isAuthWarmupInProgress = false;
   let isSbcSyncInProgress = false;
+  let isRefreshInProgress = false;
+  let hasInitialRefreshTriggered = false;
+  let wasReady = false;
 
   const applyMode = (nextMode: WidgetMode) => {
     currentMode = nextMode;
@@ -507,7 +601,11 @@ export const renderUI = () => {
           const isFlipped = flippedSbcSetIds.has(set.setId);
           const completed = Math.max(0, set.challengesCompletedCount ?? 0);
           const totalChallenges = Math.max(0, set.challengesCount ?? 0);
-          const safeTotal = Math.max(1, totalChallenges);
+          const challenges = sbcChallengesBySetId.get(set.setId);
+          const isChallengesLoading = sbcChallengesLoading.has(set.setId);
+          const challengesError = sbcChallengesErrors.get(set.setId);
+          const totalTasksLabel = challenges?.length ?? totalChallenges;
+          const safeTotal = Math.max(1, totalTasksLabel);
           const progressPct = clampNumber(Math.round((completed / safeTotal) * 100), 0, 100);
           const repeatable = resolveRepeatableLabel(set);
           const timesCompleted = Math.max(0, set.timesCompleted ?? 0);
@@ -516,14 +614,43 @@ export const renderUI = () => {
           const setImageUrl = resolveSetImageUrl(set.setImageId);
           const rewardImageUrl = resolveRewardImageUrl(set);
           const rewardType = String(set.awards?.[0]?.type ?? "reward").slice(0, 3).toUpperCase();
-          const tasks = resolveSetTasks(set);
-          const taskItems = tasks
-            .map((taskTitle, idx) => {
-              const done = idx < completed;
+          const taskCards = buildSbcTaskCards(set, challenges, isChallengesLoading, challengesError);
+          const showTaskCompletion = !isChallengesLoading && !challengesError;
+          const taskItems = taskCards
+            .map((task, idx) => {
+              const done = showTaskCompletion && idx < completed && !task.isStatus;
+              const cardClass = `fc-helper-sbc-task-card${done ? " is-done" : ""}${task.isStatus ? " is-status" : ""}`;
+              const description = task.description
+                ? `<div class="fc-helper-sbc-task-desc">${escapeHtml(task.description)}</div>`
+                : "";
+              const endTime = task.endTime ? `<span>Ends: ${escapeHtml(task.endTime)}</span>` : "";
+              const rewards =
+                task.rewards && task.rewards.length > 0
+                  ? `<span>Reward: ${escapeHtml(task.rewards.join(", "))}</span>`
+                  : "";
+              const meta =
+                endTime || rewards
+                  ? `<div class="fc-helper-sbc-task-meta">${endTime}${endTime && rewards ? " " : ""}${rewards}</div>`
+                  : "";
+              const reqTooltip = task.reqTooltip
+                ? `<span class="fc-helper-sbc-task-req" role="img" aria-label="Requirements" data-tooltip="${escapeHtml(task.reqTooltip)}">i</span>`
+                : "";
+              const fillIcon =
+                !task.isStatus && Number.isFinite(task.challengeId)
+                  ? `<span class="fc-helper-sbc-task-fill" role="img" aria-label="Fill challenge" data-action="fill-challenge" data-set-id="${set.setId}" data-challenge-id="${task.challengeId}">+</span>`
+                  : "";
+              const actions =
+                reqTooltip || fillIcon
+                  ? `<div class="fc-helper-sbc-task-actions">${reqTooltip}${fillIcon}</div>`
+                  : "";
               return `
-                <li class="fc-helper-sbc-task-item${done ? " is-done" : ""}">
-                  <span class="fc-helper-sbc-task-dot" aria-hidden="true"></span>
-                  <span>${escapeHtml(taskTitle)}</span>
+                <li class="${cardClass}">
+                  <div class="fc-helper-sbc-task-header">
+                    <div class="fc-helper-sbc-task-name">${escapeHtml(task.title)}</div>
+                    ${actions}
+                  </div>
+                  ${description}
+                  ${meta}
                 </li>
               `;
             })
@@ -566,7 +693,7 @@ export const renderUI = () => {
                   <div class="fc-helper-sbc-progress-block">
                     <div class="fc-helper-sbc-progress-meta">
                       <span>Challenges progress</span>
-                      <span>${completed}/${totalChallenges}</span>
+                      <span>${completed}/${totalTasksLabel}</span>
                     </div>
                     <div class="fc-helper-sbc-progress" aria-hidden="true">
                       <span style="width:${progressPct}%"></span>
@@ -574,7 +701,7 @@ export const renderUI = () => {
                   </div>
                 </div>
                 <div class="fc-helper-sbc-set-face fc-helper-sbc-set-face--back">
-                  <div class="fc-helper-sbc-task-title">Tasks (${totalChallenges})</div>
+                  <div class="fc-helper-sbc-task-title">Tasks (${totalTasksLabel})</div>
                   <ul class="fc-helper-sbc-task-list">
                     ${taskItems || '<li class="fc-helper-sbc-task-item"><span class="fc-helper-sbc-task-dot"></span><span>No tasks found</span></li>'}
                   </ul>
@@ -627,6 +754,9 @@ export const renderUI = () => {
     isSbcSyncInProgress = true;
     sbcCategories = [];
     sbcSelectedCategoryId = null;
+    sbcChallengesBySetId = new Map<number, SbcChallenge[]>();
+    sbcChallengesLoading = new Set<number>();
+    sbcChallengesErrors = new Map<number, string>();
     setCardPending("sbc-data", "Synchronization in progress...");
     applyView();
 
@@ -653,6 +783,29 @@ export const renderUI = () => {
     } finally {
       isSbcSyncInProgress = false;
       applyView();
+    }
+  };
+
+  const getRefreshTasks = () => [
+    {
+      id: "sbc-data",
+      run: runSbcSync,
+    },
+  ];
+
+  const runRefreshQueue = async (source: "initial" | "manual") => {
+    if (isRefreshInProgress) return;
+    isRefreshInProgress = true;
+    try {
+      const tasks = getRefreshTasks();
+      for (const task of tasks) {
+        await task.run();
+      }
+    } finally {
+      isRefreshInProgress = false;
+      if (source === "initial") {
+        hasInitialRefreshTriggered = true;
+      }
     }
   };
 
@@ -752,6 +905,11 @@ export const renderUI = () => {
         highlightedCardId !== null && cardButton.dataset.syncId === highlightedCardId,
       );
     });
+
+    if (isReady && !wasReady && !hasInitialRefreshTriggered) {
+      void runRefreshQueue("initial");
+    }
+    wasReady = isReady;
   };
 
   applyMode("half");
@@ -781,7 +939,7 @@ export const renderUI = () => {
         return;
       }
       if (action === "reload") {
-        console.info("[FC Helper] Reload action is not implemented yet.");
+        void runRefreshQueue("manual");
       }
     });
   });
@@ -839,6 +997,23 @@ export const renderUI = () => {
       if (action === "show-tasks") {
         flippedSbcSetIds.add(setId);
         cardNode.classList.add("is-flipped");
+        if (!sbcChallengesBySetId.has(setId) && !sbcChallengesLoading.has(setId)) {
+          sbcChallengesLoading.add(setId);
+          sbcChallengesErrors.delete(setId);
+          applyView();
+          void (async () => {
+            try {
+              const challenges = await fetchSbcChallenges(setId);
+              sbcChallengesBySetId.set(setId, challenges);
+            } catch (error) {
+              const errorText = error instanceof Error ? error.message : String(error);
+              sbcChallengesErrors.set(setId, errorText.slice(0, 80));
+            } finally {
+              sbcChallengesLoading.delete(setId);
+              applyView();
+            }
+          })();
+        }
         return;
       }
       if (action === "hide-tasks") {
@@ -857,12 +1032,8 @@ export const renderUI = () => {
   }
 
   subscribeActiveSiteTab((siteTab) => {
-    const prevSiteTab = currentSiteTab;
     currentSiteTab = siteTab;
     maybeStartAuthWarmup();
     applyView();
-    if (siteTab === "sbc" && prevSiteTab !== "sbc") {
-      void runSbcSync();
-    }
   });
 };

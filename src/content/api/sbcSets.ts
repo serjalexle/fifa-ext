@@ -1,4 +1,6 @@
 const EA_SBC_SETS_URL = "https://utas.mob.v5.prd.futc-ext.gcp.ea.com/ut/game/fc26/sbs/sets";
+const EA_SBC_CHALLENGES_URL = (setId: number) =>
+  `https://utas.mob.v5.prd.futc-ext.gcp.ea.com/ut/game/fc26/sbs/setId/${setId}/challenges`;
 const BRIDGE_SCRIPT_ID = "fc-helper-sbc-bridge";
 const BRIDGE_SCRIPT_FILE = "sbcBridge.js";
 const REQUEST_SOURCE = "fc-helper-sbc-request";
@@ -74,6 +76,25 @@ export type SbcCategory = {
   name: string;
   priority?: number;
   sets: SbcSet[];
+};
+
+export type SbcChallenge = {
+  name?: string;
+  description?: string;
+  challengeId?: number;
+  status?: string;
+  setId?: number;
+  endTime?: number;
+  repeatable?: boolean;
+  formation?: string;
+  timesCompleted?: number;
+  elgReq?: Array<Record<string, unknown>>;
+  elgDesc?: Array<Record<string, unknown>>;
+  awards?: SbcAward[];
+  elgOperation?: string;
+  tutorial?: number;
+  type?: string;
+  challengeImageId?: string;
 };
 
 export type SbcSetsResponse = {
@@ -228,4 +249,22 @@ export const fetchSbcSets = async (): Promise<SbcSetsResponse> => {
   return {
     categories: categories as SbcCategory[],
   };
+};
+
+export const fetchSbcChallenges = async (setId: number): Promise<SbcChallenge[]> => {
+  const payload = await fetchViaBridge(EA_SBC_CHALLENGES_URL(setId));
+
+  if (Array.isArray(payload)) {
+    return payload as SbcChallenge[];
+  }
+
+  if (payload && typeof payload === "object") {
+    const bag = payload as Record<string, unknown>;
+    const challenges = bag.challenges;
+    if (Array.isArray(challenges)) {
+      return challenges as SbcChallenge[];
+    }
+  }
+
+  throw new Error("[FC Helper] SBC challenges payload is invalid");
 };

@@ -1,0 +1,471 @@
+[
+    {
+        "name": "Rangers - Celtic",
+        "priority": 1,
+        "status": "IN_PROGRESS",
+        "setId": 584,
+        "description": "Обменяйте состав по мотивам матча Rangers - Celtic.",
+        "challengeId": 1726,
+        "endTime": 363025,
+        "repeatable": false,
+        "formation": "f4231",
+        "timesCompleted": 0,
+        "elgReq": [
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 2,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "NATION_ID",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 10,
+                "eligibilityValue": 42
+            },
+            {
+                "type": "SAME_LEAGUE_COUNT",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 5,
+                "eligibilityValue": 3
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 13,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 2,
+                "eligibilityValue": 3
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "PLAYER_RARITY_GROUP",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 25,
+                "eligibilityValue": 4
+            },
+            {
+                "type": "PLAYER_QUALITY",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 3,
+                "eligibilityValue": 2
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "CHEMISTRY_POINTS",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 35,
+                "eligibilityValue": 14
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            }
+        ],
+        "elgDesc": [],
+        "awards": [
+            {
+                "value": 528,
+                "type": "pack",
+                "halId": 4,
+                "count": 1,
+                "isUntradeable": false,
+                "loan": 0,
+                "loanType": "NONE"
+            }
+        ],
+        "elgOperation": "AND",
+        "tutorial": 0,
+        "type": "OPEN_CHALLENGE",
+        "challengeImageId": "340098-b53c9e3b-e395"
+    },
+    {
+        "name": "Olympique de Marseille - Olympique Lyonnais",
+        "priority": 2,
+        "status": "IN_PROGRESS",
+        "setId": 584,
+        "description": "Обменяйте состав по мотивам матча Olympique de Marseille - Olympique Lyonnais.",
+        "challengeId": 1727,
+        "endTime": 363025,
+        "repeatable": false,
+        "formation": "f433",
+        "timesCompleted": 0,
+        "elgReq": [
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 2,
+                "eligibilityValue": 2
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "LEAGUE_ID",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 11,
+                "eligibilityValue": 16
+            },
+            {
+                "type": "SAME_NATION_COUNT",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 4,
+                "eligibilityValue": 4
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "LEAGUE_COUNT",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 8,
+                "eligibilityValue": 4
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 13,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 2,
+                "eligibilityValue": 3
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "PLAYER_LEVEL",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 17,
+                "eligibilityValue": 3
+            },
+            {
+                "type": "PLAYER_QUALITY",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 3,
+                "eligibilityValue": 2
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "CHEMISTRY_POINTS",
+                "eligibilitySlot": 6,
+                "eligibilityKey": 35,
+                "eligibilityValue": 18
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 6,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            }
+        ],
+        "elgDesc": [],
+        "awards": [
+            {
+                "value": 303,
+                "type": "pack",
+                "halId": 3,
+                "count": 1,
+                "isUntradeable": false,
+                "loan": 0,
+                "loanType": "NONE"
+            }
+        ],
+        "elgOperation": "AND",
+        "tutorial": 0,
+        "type": "OPEN_CHALLENGE",
+        "challengeImageId": "340099-4eb47cfc-9b58"
+    },
+    {
+        "name": "Borussia Dortmund - FC Bayern München",
+        "priority": 3,
+        "status": "NOT_STARTED",
+        "setId": 584,
+        "description": "Обменяйте состав по мотивам матча Borussia Dortmund - FC Bayern München.",
+        "challengeId": 1728,
+        "endTime": 363025,
+        "repeatable": false,
+        "formation": "f442",
+        "timesCompleted": 0,
+        "elgReq": [
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 2,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "CLUB_ID",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 12,
+                "eligibilityValue": 22
+            },
+            {
+                "type": "CLUB_ID",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 12,
+                "eligibilityValue": 21
+            },
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 2,
+                "eligibilityValue": 2
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "NATION_ID",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 10,
+                "eligibilityValue": 21
+            },
+            {
+                "type": "SAME_CLUB_COUNT",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 6,
+                "eligibilityValue": 4
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 13,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 2,
+                "eligibilityValue": 2
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "PLAYER_RARITY_GROUP",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 25,
+                "eligibilityValue": 4
+            },
+            {
+                "type": "TEAM_RATING_1_TO_100",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 19,
+                "eligibilityValue": 76
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "CHEMISTRY_POINTS",
+                "eligibilitySlot": 6,
+                "eligibilityKey": 35,
+                "eligibilityValue": 22
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 6,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            }
+        ],
+        "elgDesc": [],
+        "awards": [
+            {
+                "value": 517,
+                "type": "pack",
+                "halId": 4,
+                "count": 1,
+                "isUntradeable": false,
+                "loan": 0,
+                "loanType": "NONE"
+            }
+        ],
+        "elgOperation": "AND",
+        "tutorial": 0,
+        "type": "OPEN_CHALLENGE",
+        "challengeImageId": "340100-4949745e-b36f"
+    },
+    {
+        "name": "Arsenal - Chelsea",
+        "priority": 4,
+        "status": "COMPLETED",
+        "setId": 584,
+        "description": "Обменяйте состав по мотивам матча Arsenal - Chelsea.",
+        "challengeId": 1729,
+        "endTime": 363025,
+        "repeatable": false,
+        "formation": "f3421",
+        "timesCompleted": 1,
+        "elgReq": [
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 2,
+                "eligibilityValue": 2
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "CLUB_ID",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 12,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "CLUB_ID",
+                "eligibilitySlot": 1,
+                "eligibilityKey": 12,
+                "eligibilityValue": 5
+            },
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 2,
+                "eligibilityValue": 3
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "NATION_ID",
+                "eligibilitySlot": 2,
+                "eligibilityKey": 10,
+                "eligibilityValue": 14
+            },
+            {
+                "type": "CLUB_COUNT",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 9,
+                "eligibilityValue": 5
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 3,
+                "eligibilityKey": 13,
+                "eligibilityValue": 1
+            },
+            {
+                "type": "PLAYER_COUNT",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 2,
+                "eligibilityValue": 3
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "PLAYER_RARITY_GROUP",
+                "eligibilitySlot": 4,
+                "eligibilityKey": 25,
+                "eligibilityValue": 4
+            },
+            {
+                "type": "TEAM_RATING_1_TO_100",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 19,
+                "eligibilityValue": 78
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 5,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            },
+            {
+                "type": "CHEMISTRY_POINTS",
+                "eligibilitySlot": 6,
+                "eligibilityKey": 35,
+                "eligibilityValue": 26
+            },
+            {
+                "type": "SCOPE",
+                "eligibilitySlot": 6,
+                "eligibilityKey": 13,
+                "eligibilityValue": 0
+            }
+        ],
+        "elgDesc": [],
+        "awards": [
+            {
+                "value": 531,
+                "type": "pack",
+                "halId": 4,
+                "count": 1,
+                "isUntradeable": false,
+                "loan": 0,
+                "loanType": "NONE"
+            }
+        ],
+        "elgOperation": "AND",
+        "tutorial": 0,
+        "type": "OPEN_CHALLENGE",
+        "lastCompleteTime": 1772368679,
+        "challengeImageId": "340101-c84a03f0-0224"
+    }
+]
